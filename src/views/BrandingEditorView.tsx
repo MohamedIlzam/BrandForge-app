@@ -429,13 +429,15 @@ export const BrandingEditorView: React.FC = () => {
 
     return (
         <div style={{ position: 'relative' }}>
-            <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+            <div className="page-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.4rem' }}>
                 <div>
-                    <div style={{ fontSize: '0.8rem', fontWeight: 800, color: primaryColor, letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+                    <div style={{ fontSize: '0.75rem', fontWeight: 800, color: primaryColor, letterSpacing: '0.08em', textTransform: 'uppercase', marginBottom: '0.1rem' }}>
                         PROJECT: ALPHA_OMNICHANNEL_v2
                     </div>
-                    <h1 className="page-title">Branding & Layout Editor</h1>
-                    <p className="page-subtitle">brandforge.ai/preview</p>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.75rem', flexWrap: 'wrap' }}>
+                        <h1 className="page-title" style={{ margin: 0, fontSize: '1.5rem' }}>Branding & Layout Editor</h1>
+                        <span className="page-subtitle" style={{ margin: 0, fontSize: '0.85rem' }}>brandforge.ai/preview</span>
+                    </div>
                 </div>
 
                 <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
@@ -465,8 +467,8 @@ export const BrandingEditorView: React.FC = () => {
 
             <div className="editor-workspace-grid">
                 {/* Left Column: Interactive Visual Canvas */}
-                <div className="card editor-canvas-card" style={{ padding: '1.25rem', background: '#0f172a', color: '#ffffff', minHeight: 480, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start' }}>
-                    <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #334155', paddingBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <div className="card editor-canvas-card" style={{ padding: '1rem', background: '#0f172a', color: '#ffffff', minHeight: 'auto', position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start' }}>
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', borderBottom: '1px solid #334155', paddingBottom: '0.5rem', flexWrap: 'wrap', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: '#94a3b8' }}>
                             <Grid size={16} color={primaryColor} />
                             <span>Canvas Grid • Ratio: {targetAspectRatio}</span>
@@ -512,7 +514,7 @@ export const BrandingEditorView: React.FC = () => {
                             backdropFilter: backgroundBlurDepth > 0 ? `blur(${backgroundBlurDepth}px)` : 'none',
                             WebkitBackdropFilter: backgroundBlurDepth > 0 ? `blur(${backgroundBlurDepth}px)` : 'none',
                             filter: backgroundBlurDepth > 0 ? `blur(${backgroundBlurDepth / 4}px)` : 'none',
-                            margin: 'auto',
+                            margin: '0 auto',
                             color: canvasBgMode === 'light' ? '#0f172a' : '#ffffff',
                             overflow: 'hidden',
                             ...getCanvasStyle()
