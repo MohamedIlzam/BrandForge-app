@@ -9,11 +9,7 @@ import { BrandingEditorView } from './views/BrandingEditorView';
 import { ExportResizeView } from './views/ExportResizeView';
 import './styles/theme.css';
 
-interface MainContentProps {
-    onToggleMobileMenu: () => void;
-}
-
-const MainContent: React.FC<MainContentProps> = ({ onToggleMobileMenu }) => {
+const MainContent: React.FC = () => {
     const { activeView } = useBrandContext();
 
     const renderView = () => {
@@ -33,7 +29,7 @@ const MainContent: React.FC<MainContentProps> = ({ onToggleMobileMenu }) => {
 
     return (
         <div className="main-layout">
-            <Header onToggleMobileMenu={onToggleMobileMenu} />
+            <Header />
             <main className="content-area">
                 {renderView()}
             </main>
@@ -43,21 +39,15 @@ const MainContent: React.FC<MainContentProps> = ({ onToggleMobileMenu }) => {
 };
 
 export const App: React.FC = () => {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-
     return (
         <BrandProvider>
             <div className="app-container">
-                <Sidebar
-                    isOpen={isMobileMenuOpen}
-                    onClose={() => setIsMobileMenuOpen(false)}
-                />
-                <MainContent
-                    onToggleMobileMenu={() => setIsMobileMenuOpen(prev => !prev)}
-                />
+                <Sidebar />
+                <MainContent />
             </div>
         </BrandProvider>
     );
 };
+
 
 export default App;
