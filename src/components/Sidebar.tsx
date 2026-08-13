@@ -5,7 +5,7 @@ import {
     Sparkles,
     Sliders,
     Download,
-    Sparkle,
+    Layers,
     HelpCircle,
     MessageSquareHeart
 } from 'lucide-react';
@@ -27,10 +27,23 @@ export const Sidebar: React.FC = () => {
 
     return (
         <aside className="sidebar">
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 0.75rem', marginBottom: '1rem' }}>
-                <Sparkle size={18} color="var(--primary)" />
-                <span style={{ fontWeight: 700, fontSize: '0.95rem', color: 'var(--text-main)' }}>Brand Kit</span>
+            <div className="brand-logo" style={{ marginBottom: '1.25rem', padding: '0.25rem 0.5rem' }}>
+                <div style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: 8,
+                    background: 'linear-gradient(135deg, #14b89c, #0d9488)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#ffffff'
+                }}>
+                    <Layers size={20} />
+                </div>
+                <span style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-main)' }}>BrandForge</span>
+                <span className="brand-badge">PRO</span>
             </div>
+
 
             <div className="sidebar-title">Global Styles</div>
             <ul className="sidebar-menu">
