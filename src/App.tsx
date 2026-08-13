@@ -2,6 +2,7 @@ import React from 'react';
 import { BrandProvider, useBrandContext } from './context/BrandContext';
 import { Header } from './components/Header';
 import { Sidebar } from './components/Sidebar';
+import { BottomNav } from './components/BottomNav';
 import { DashboardView } from './views/DashboardView';
 import { AIGenerationWorkspaceView } from './views/AIGenerationWorkspaceView';
 import { BrandingEditorView } from './views/BrandingEditorView';
@@ -36,6 +37,7 @@ const MainContent: React.FC<MainContentProps> = ({ onToggleMobileMenu }) => {
             <main className="content-area">
                 {renderView()}
             </main>
+            <BottomNav />
         </div>
     );
 };
