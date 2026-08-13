@@ -7,18 +7,20 @@ import {
     Download,
     Layers,
     FolderKanban,
-    Grid
+    Check
 } from 'lucide-react';
 
 export const Header: React.FC = () => {
     const { activeView, setActiveView, brandKit } = useBrandContext();
 
-    const navItems: { id: ViewMode; label: string; icon: React.ReactNode }[] = [
-        { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
-        { id: 'ai_workspace', label: 'AI Workspace', icon: <Sparkles size={18} /> },
-        { id: 'editor', label: 'Branding Editor', icon: <Sliders size={18} /> },
-        { id: 'export', label: 'Export & Resize', icon: <Download size={18} /> }
+    const steps: { id: ViewMode; label: string; icon: React.ReactNode }[] = [
+        { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={14} /> },
+        { id: 'ai_workspace', label: 'AI Workspace', icon: <Sparkles size={14} /> },
+        { id: 'editor', label: 'Branding Editor', icon: <Sliders size={14} /> },
+        { id: 'export', label: 'Export & Resize', icon: <Download size={14} /> }
     ];
+
+    const currentStepIndex = steps.findIndex(s => s.id === activeView);
 
     return (
         <header className="header-nav">
@@ -39,18 +41,29 @@ export const Header: React.FC = () => {
                 <span className="brand-badge">PRO</span>
             </div>
 
-            <nav className="nav-tabs">
-                {navItems.map((item) => (
-                    <button
-                        key={item.id}
-                        className={`nav-tab-btn ${activeView === item.id ? 'active' : ''}`}
-                        onClick={() => setActiveView(item.id)}
-                    >
-                        {item.icon}
-                        <span>{item.label}</span>
-                    </button>
-                ))}
-            </nav>
+            {/* Non-clickable Horizontal Workflow Stepper */}
+            <div className="workflow-stepper">
+                {steps.map((step, idx) => {
+                    const isCompleted = idx < currentStepIndex;
+                    const isActive = idx === currentStepIndex;
+
+                    return (
+                        <React.Fragment key={step.id}>
+                            <div className={`step-node ${isCompleted ? 'completed' : ''} ${isActive ? 'active' : ''}`}>
+                                <div className="step-circle">
+                                    {isCompleted ? <Check size={12} strokeWidth={3} /> : idx + 1}
+                                </div>
+                                {step.icon}
+                                <span>{step.label}</span>
+                            </div>
+                            {idx < steps.length - 1 && (
+                                <div className={`step-connector ${idx < currentStepIndex ? 'completed' : ''}`} />
+                            )}
+                        </React.Fragment>
+                    );
+                })}
+            </div>
+
 
             <div className="user-actions">
                 <div style={{
