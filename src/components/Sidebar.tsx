@@ -49,18 +49,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
             <aside className={`sidebar ${isOpen ? 'mobile-open' : ''}`}>
                 <div className="brand-logo" style={{ marginBottom: '1.25rem', padding: '0.25rem 0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                        <div style={{
-                            width: 32,
-                            height: 32,
-                            borderRadius: 8,
-                            background: 'linear-gradient(135deg, #14b89c, #0d9488)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            color: '#ffffff'
-                        }}>
-                            <Layers size={20} />
-                        </div>
+                        <img
+                            src="/logo.png"
+                            alt="BrandForge Logo"
+                            style={{
+                                height: 'auto',
+                                maxHeight: '44px',
+                                width: 'auto',
+                                objectFit: 'contain'
+                            }}
+                        />
                         <span style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-main)' }}>BrandForge</span>
                         <span className="brand-badge">PRO</span>
                     </div>

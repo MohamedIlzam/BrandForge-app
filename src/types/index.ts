@@ -10,6 +10,7 @@ export interface BrandKit {
     colors: BrandColor[];
     consistencyScore: number;
     warningsCount: number;
+    logoUrl?: string;
 }
 
 export interface DesignProject {
@@ -33,6 +34,8 @@ export interface EditorProperties {
     focalPointRule: boolean;
     typographyScaling: 'Strict' | 'Fluid';
     brandMarkPlacement: 'Top-Right' | 'Top-Left' | 'Center' | 'Bottom-Right';
+    textAlign: 'left' | 'center' | 'right';
+    fontSizeMultiplier: number;
 }
 
 export interface ExportPreset {

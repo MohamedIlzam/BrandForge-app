@@ -93,7 +93,7 @@ export const DashboardView: React.FC = () => {
 
                         <div style={{ borderTop: '1px solid var(--border-light)', paddingTop: '1rem' }}>
                             <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                                Typography System
+                                Typography & Brand Mark
                             </span>
                             <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.5rem' }}>
                                 <div style={{
@@ -114,6 +114,22 @@ export const DashboardView: React.FC = () => {
                                     <div style={{ fontSize: '0.95rem', fontWeight: 700 }}>{brandKit.font}</div>
                                     <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>Primary Brand Typeface (Weights: 400, 600, 800)</div>
                                 </div>
+                            </div>
+
+                            {/* Custom Logo Status Preview */}
+                            <div style={{ marginTop: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 0.75rem', background: 'var(--bg-secondary)', borderRadius: 'var(--border-radius-sm)', border: '1px solid var(--border-color)' }}>
+                                <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)' }}>Brand Logo:</div>
+                                {useBrandContext().customLogoUrl ? (
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                        <img src={useBrandContext().customLogoUrl!} alt="Uploaded Brand Logo" style={{ height: 22, maxHeight: 24, objectFit: 'contain' }} />
+                                        <span style={{ fontSize: '0.75rem', color: 'var(--primary-hover)', fontWeight: 700 }}>Custom Logo Active</span>
+                                    </div>
+                                ) : (
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                                        <Sparkles size={12} color="var(--primary)" />
+                                        <span>Default Sparkles Brand Mark</span>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

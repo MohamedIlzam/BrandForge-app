@@ -7,6 +7,8 @@ interface BrandContextType {
     activeView: ViewMode;
     setActiveView: (view: ViewMode) => void;
     brandKit: BrandKit;
+    customLogoUrl: string | null;
+    setCustomLogoUrl: (url: string | null) => void;
     projects: DesignProject[];
     creativeCopies: CreativeCopyItem[];
     brandVisionPrompt: string;
@@ -80,7 +82,9 @@ const initialEditorProps: EditorProperties = {
     clearSpaceMargin: 15,
     focalPointRule: true,
     typographyScaling: 'Strict',
-    brandMarkPlacement: 'Top-Right'
+    brandMarkPlacement: 'Top-Right',
+    textAlign: 'center',
+    fontSizeMultiplier: 1.0
 };
 
 const initialExportPresets: ExportPreset[] = [
@@ -112,6 +116,7 @@ const BrandContext = createContext<BrandContextType | undefined>(undefined);
 export const BrandProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [activeView, setActiveView] = useState<ViewMode>('dashboard');
     const [brandKit] = useState<BrandKit>(initialBrandKit);
+    const [customLogoUrl, setCustomLogoUrl] = useState<string | null>(null);
     const [projects] = useState<DesignProject[]>(initialProjects);
     const [creativeCopies, setCreativeCopies] = useState<CreativeCopyItem[]>(initialCopies);
     const [brandVisionPrompt, setBrandVisionPrompt] = useState<string>('Sustainable artisanal coffee brand focused on productivity and organic purity.');
@@ -143,6 +148,8 @@ export const BrandProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             activeView,
             setActiveView,
             brandKit,
+            customLogoUrl,
+            setCustomLogoUrl,
             projects,
             creativeCopies,
             brandVisionPrompt,
