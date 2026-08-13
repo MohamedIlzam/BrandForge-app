@@ -2,10 +2,16 @@ import React from 'react';
 import { useBrandContext, ViewMode } from '../context/BrandContext';
 import {
     Sparkles,
-    Check
+    Check,
+    Menu,
+    Layers
 } from 'lucide-react';
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+    onToggleMobileMenu?: () => void;
+}
+
+export const Header: React.FC<HeaderProps> = ({ onToggleMobileMenu }) => {
     const { activeView, setActiveView } = useBrandContext();
 
     const steps: { id: ViewMode; label: string }[] = [
@@ -19,6 +25,21 @@ export const Header: React.FC = () => {
 
     return (
         <header className="header-nav">
+            {/* Mobile Header Brand & Hamburger Button */}
+            <div className="mobile-header-bar">
+                <button
+                    className="mobile-hamburger-btn"
+                    onClick={onToggleMobileMenu}
+                    aria-label="Open Menu"
+                >
+                    <Menu size={22} />
+                </button>
+                <div className="mobile-brand-title">
+                    <Layers size={18} color="var(--primary)" />
+                    <span>BrandForge</span>
+                </div>
+            </div>
+
             {/* Non-clickable Horizontal Workflow Stepper */}
             <div className="workflow-stepper">
                 {steps.map((step, idx) => {
@@ -48,7 +69,7 @@ export const Header: React.FC = () => {
                     style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}
                 >
                     <Sparkles size={16} />
-                    <span>New Generation</span>
+                    <span className="btn-label-desktop">New Generation</span>
                 </button>
             </div>
         </header>
