@@ -9,6 +9,27 @@ import {
 
 export const BottomNav: React.FC = () => {
     const { activeView, setActiveView } = useBrandContext();
+    const [isScrolled, setIsScrolled] = React.useState(false);
+
+    React.useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop || document.querySelector('.content-area')?.scrollTop || 0;
+            setIsScrolled(scrollTop > 20);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        const contentArea = document.querySelector('.content-area');
+        if (contentArea) {
+            contentArea.addEventListener('scroll', handleScroll, { passive: true });
+        }
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (contentArea) {
+                contentArea.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, []);
 
     const navItems: { id: ViewMode; label: string; icon: React.ReactNode }[] = [
         { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={20} /> },
@@ -18,7 +39,7 @@ export const BottomNav: React.FC = () => {
     ];
 
     return (
-        <nav className="bottom-nav">
+        <nav className={`bottom-nav ${isScrolled ? 'scrolled' : ''}`}>
             <div className="bottom-nav-container">
                 {navItems.map((item) => {
                     const isActive = activeView === item.id;

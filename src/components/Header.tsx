@@ -13,6 +13,27 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ onToggleMobileMenu }) => {
     const { activeView, setActiveView } = useBrandContext();
+    const [isScrolled, setIsScrolled] = React.useState(false);
+
+    React.useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.scrollY || document.documentElement.scrollTop || document.querySelector('.content-area')?.scrollTop || 0;
+            setIsScrolled(scrollTop > 20);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        const contentArea = document.querySelector('.content-area');
+        if (contentArea) {
+            contentArea.addEventListener('scroll', handleScroll, { passive: true });
+        }
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (contentArea) {
+                contentArea.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, []);
 
     const steps: { id: ViewMode; label: string }[] = [
         { id: 'dashboard', label: 'Dashboard' },
@@ -24,7 +45,7 @@ export const Header: React.FC<HeaderProps> = ({ onToggleMobileMenu }) => {
     const currentStepIndex = steps.findIndex(s => s.id === activeView);
 
     return (
-        <header className="header-nav">
+        <header className={`header-nav ${isScrolled ? 'scrolled' : ''}`}>
             {/* Mobile Header Brand & Hamburger Button */}
             <div className="mobile-header-bar">
                 <button
