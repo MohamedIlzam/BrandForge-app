@@ -7,10 +7,16 @@ import {
     Download,
     Layers,
     HelpCircle,
-    MessageSquareHeart
+    MessageSquareHeart,
+    X
 } from 'lucide-react';
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+    isOpen?: boolean;
+    onClose?: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => {
     const { activeView, setActiveView } = useBrandContext();
 
     const navigationItems: { id: ViewMode; label: string; icon: React.ReactNode }[] = [
@@ -25,50 +31,82 @@ export const Sidebar: React.FC = () => {
         { id: 'feedback', label: 'Feedback', icon: <MessageSquareHeart size={18} /> }
     ];
 
+    const handleSelectView = (view: ViewMode) => {
+        setActiveView(view);
+        if (onClose) onClose();
+    };
+
     return (
-        <aside className="sidebar">
-            <div className="brand-logo" style={{ marginBottom: '1.25rem', padding: '0.25rem 0.5rem' }}>
-                <div style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: 8,
-                    background: 'linear-gradient(135deg, #14b89c, #0d9488)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#ffffff'
-                }}>
-                    <Layers size={20} />
+        <>
+            {/* Mobile Overlay Backdrop */}
+            {isOpen && (
+                <div
+                    className="sidebar-backdrop"
+                    onClick={onClose}
+                />
+            )}
+
+            <aside className={`sidebar ${isOpen ? 'mobile-open' : ''}`}>
+                <div className="brand-logo" style={{ marginBottom: '1.25rem', padding: '0.25rem 0.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                        <div style={{
+                            width: 32,
+                            height: 32,
+                            borderRadius: 8,
+                            background: 'linear-gradient(135deg, #14b89c, #0d9488)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            color: '#ffffff'
+                        }}>
+                            <Layers size={20} />
+                        </div>
+                        <span style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-main)' }}>BrandForge</span>
+                        <span className="brand-badge">PRO</span>
+                    </div>
+
+                    {onClose && (
+                        <button
+                            className="mobile-close-btn"
+                            onClick={onClose}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                padding: '0.25rem',
+                                color: 'var(--text-muted)'
+                            }}
+                        >
+                            <X size={20} />
+                        </button>
+                    )}
                 </div>
-                <span style={{ fontWeight: 800, fontSize: '1.1rem', color: 'var(--text-main)' }}>BrandForge</span>
-                <span className="brand-badge">PRO</span>
-            </div>
 
+                <div className="sidebar-title">Global Styles</div>
+                <ul className="sidebar-menu">
+                    {navigationItems.map((item) => (
+                        <li
+                            key={item.id}
+                            className={`sidebar-item ${activeView === item.id ? 'active' : ''}`}
+                            onClick={() => handleSelectView(item.id)}
+                        >
+                            {item.icon}
+                            <span>{item.label}</span>
+                        </li>
+                    ))}
+                </ul>
 
-            <div className="sidebar-title">Global Styles</div>
-            <ul className="sidebar-menu">
-                {navigationItems.map((item) => (
-                    <li
-                        key={item.id}
-                        className={`sidebar-item ${activeView === item.id ? 'active' : ''}`}
-                        onClick={() => setActiveView(item.id)}
-                    >
-                        {item.icon}
-                        <span>{item.label}</span>
-                    </li>
-                ))}
-            </ul>
-
-            <div className="sidebar-title" style={{ marginTop: 'auto' }}>System</div>
-            <ul className="sidebar-menu">
-                {supportItems.map((item) => (
-                    <li key={item.id} className="sidebar-item">
-                        {item.icon}
-                        <span>{item.label}</span>
-                    </li>
-                ))}
-            </ul>
-        </aside>
+                <div className="sidebar-title" style={{ marginTop: 'auto' }}>System</div>
+                <ul className="sidebar-menu">
+                    {supportItems.map((item) => (
+                        <li key={item.id} className="sidebar-item" onClick={onClose}>
+                            {item.icon}
+                            <span>{item.label}</span>
+                        </li>
+                    ))}
+                </ul>
+            </aside>
+        </>
     );
 };
 
