@@ -16,6 +16,8 @@ import {
 export const BrandingEditorView: React.FC = () => {
     const { editorProps, setEditorProps, brandKit, creativeCopies } = useBrandContext();
     const [activeTab, setActiveTab] = useState<'editor' | 'assets' | 'history'>('editor');
+    const [targetAspectRatio, setTargetAspectRatio] = useState<'16:9' | '1:1' | '3:4' | '9:16'>('16:9');
+    const [backgroundBlurDepth, setBackgroundBlurDepth] = useState<number>(0);
 
     const selectedCopy = creativeCopies[0];
 
@@ -25,6 +27,20 @@ export const BrandingEditorView: React.FC = () => {
 
     const handlePlacementChange = (placement: typeof editorProps.brandMarkPlacement) => {
         setEditorProps(prev => ({ ...prev, brandMarkPlacement: placement }));
+    };
+
+    const getCanvasStyle = () => {
+        switch (targetAspectRatio) {
+            case '1:1':
+                return { width: '100%', maxWidth: '380px', aspectRatio: '1 / 1' };
+            case '3:4':
+                return { width: '100%', maxWidth: '330px', aspectRatio: '3 / 4' };
+            case '9:16':
+                return { width: '100%', maxWidth: '250px', aspectRatio: '9 / 16' };
+            case '16:9':
+            default:
+                return { width: '100%', maxWidth: '100%', aspectRatio: '16 / 9' };
+        }
     };
 
     return (
@@ -44,7 +60,7 @@ export const BrandingEditorView: React.FC = () => {
                         onClick={() => setActiveTab('editor')}
                     >
                         <Sliders size={16} />
-                        <span>Editor</span>
+                        <span>Layout Engine</span>
                     </button>
                     <button
                         className={`btn ${activeTab === 'assets' ? 'btn-primary' : 'btn-secondary'}`}
@@ -65,11 +81,11 @@ export const BrandingEditorView: React.FC = () => {
 
             <div className="grid-3" style={{ gridTemplateColumns: '2fr 1fr', gap: '1.5rem', alignItems: 'start' }}>
                 {/* Left Column: Interactive Visual Canvas */}
-                <div className="card" style={{ padding: '1.5rem', background: '#0f172a', color: '#ffffff', minHeight: 520, position: 'relative' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #334155', paddingBottom: '0.75rem' }}>
+                <div className="card" style={{ padding: '1.5rem', background: '#0f172a', color: '#ffffff', minHeight: 540, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                    <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #334155', paddingBottom: '0.75rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: '#94a3b8' }}>
                             <Grid size={16} color="var(--primary)" />
-                            <span>Canvas Boundary Grid • Clear Space: {editorProps.clearSpaceMargin}%</span>
+                            <span>Canvas Boundary Grid • Ratio: {targetAspectRatio} • Clear Space: {editorProps.clearSpaceMargin}% • Blur: {backgroundBlurDepth}px</span>
                         </div>
                         <div style={{ display: 'flex', gap: '0.5rem' }}>
                             <span className="brand-badge">{editorProps.layoutEngine} Engine</span>
@@ -81,15 +97,19 @@ export const BrandingEditorView: React.FC = () => {
                         background: 'linear-gradient(135deg, #1e293b, #0f172a)',
                         border: `2px dashed ${editorProps.focalPointRule ? 'var(--primary)' : '#334155'}`,
                         borderRadius: 'var(--border-radius-md)',
-                        padding: `${editorProps.clearSpaceMargin * 2}px`,
-                        minHeight: 400,
+                        padding: `${editorProps.clearSpaceMargin * 1.5}px`,
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         alignItems: 'center',
                         position: 'relative',
                         transition: 'all 0.3s ease',
-                        boxShadow: 'inset 0 0 40px rgba(0,0,0,0.5)'
+                        boxShadow: 'inset 0 0 40px rgba(0,0,0,0.5)',
+                        backdropFilter: backgroundBlurDepth > 0 ? `blur(${backgroundBlurDepth}px)` : 'none',
+                        WebkitBackdropFilter: backgroundBlurDepth > 0 ? `blur(${backgroundBlurDepth}px)` : 'none',
+                        filter: backgroundBlurDepth > 0 ? `blur(${backgroundBlurDepth / 4}px)` : 'none',
+                        margin: 'auto',
+                        ...getCanvasStyle()
                     }}>
                         {/* Brand Mark positioned dynamically based on state */}
                         <div style={{
@@ -100,31 +120,31 @@ export const BrandingEditorView: React.FC = () => {
                             left: editorProps.brandMarkPlacement.includes('Left') ? `${editorProps.clearSpaceMargin}px` : 'auto',
                             background: 'var(--primary)',
                             color: '#ffffff',
-                            padding: '0.5rem 1rem',
+                            padding: '0.4rem 0.8rem',
                             borderRadius: '8px',
                             fontWeight: 800,
-                            fontSize: '0.85rem',
+                            fontSize: '0.75rem',
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '0.4rem',
+                            gap: '0.3rem',
                             boxShadow: 'var(--shadow-glow)'
                         }}>
-                            <Sparkles size={14} />
+                            <Sparkles size={12} />
                             <span>Brand Mark</span>
                         </div>
 
-                        <div style={{ maxWidth: '85%', textAlign: 'center' }}>
+                        <div style={{ maxWidth: '90%', textAlign: 'center' }}>
                             <h2 style={{
-                                fontSize: editorProps.typographyScaling === 'Fluid' ? '2.4rem' : '2.1rem',
+                                fontSize: targetAspectRatio === '9:16' ? '1.4rem' : editorProps.typographyScaling === 'Fluid' ? '2.1rem' : '1.8rem',
                                 fontWeight: 800,
                                 lineHeight: 1.2,
                                 color: '#ffffff',
-                                marginBottom: '1rem',
+                                marginBottom: '0.75rem',
                                 letterSpacing: '-0.02em'
                             }}>
                                 The future of Generative Branding is deterministic.
                             </h2>
-                            <p style={{ fontSize: '1.05rem', color: '#94a3b8', lineHeight: 1.6 }}>
+                            <p style={{ fontSize: targetAspectRatio === '9:16' ? '0.85rem' : '0.95rem', color: '#94a3b8', lineHeight: 1.5 }}>
                                 {selectedCopy ? selectedCopy.subtext : 'Sustainable energy for the modern grind.'}
                             </p>
                         </div>
@@ -149,7 +169,26 @@ export const BrandingEditorView: React.FC = () => {
                         </div>
                     </div>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                        {/* Target Aspect Ratio Control */}
+                        <div>
+                            <label style={{ fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '0.5rem' }}>
+                                Target Aspect Ratio
+                            </label>
+                            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '0.35rem' }}>
+                                {(['16:9', '1:1', '3:4', '9:16'] as const).map((ratio) => (
+                                    <button
+                                        key={ratio}
+                                        className={`btn ${targetAspectRatio === ratio ? 'btn-primary' : 'btn-secondary'}`}
+                                        style={{ padding: '0.45rem 0.25rem', fontSize: '0.8rem', fontWeight: 700, justifyContent: 'center' }}
+                                        onClick={() => setTargetAspectRatio(ratio)}
+                                    >
+                                        {ratio}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
                         {/* Layout Engine Mode */}
                         <div>
                             <label style={{ fontSize: '0.85rem', fontWeight: 700, display: 'block', marginBottom: '0.5rem' }}>
@@ -185,6 +224,25 @@ export const BrandingEditorView: React.FC = () => {
                             />
                             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                                 Determines the distance maintained between the brand mark and edge elements.
+                            </span>
+                        </div>
+
+                        {/* Background Blur Depth Control */}
+                        <div>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', fontWeight: 700, marginBottom: '0.5rem' }}>
+                                <span>Background Blur Depth</span>
+                                <span style={{ color: 'var(--primary)' }}>{backgroundBlurDepth}px</span>
+                            </div>
+                            <input
+                                type="range"
+                                min="0"
+                                max="20"
+                                value={backgroundBlurDepth}
+                                onChange={(e) => setBackgroundBlurDepth(Number(e.target.value))}
+                                style={{ width: '100%', accentColor: 'var(--primary)' }}
+                            />
+                            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
+                                Adjusts the background backdrop blur intensity for depth perception.
                             </span>
                         </div>
 
