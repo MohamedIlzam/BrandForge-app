@@ -25,6 +25,23 @@ export const Header: React.FC = () => {
 
     return (
         <header className="header-nav">
+            {/* Brand Logo & Name */}
+            <div className="brand-logo" style={{ cursor: 'pointer' }} onClick={() => setActiveView('dashboard')}>
+                <div style={{
+                    width: 32,
+                    height: 32,
+                    borderRadius: 8,
+                    background: 'var(--primary)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: '#ffffff'
+                }}>
+                    <Layers size={18} />
+                </div>
+                <span style={{ fontWeight: 800, fontSize: '1.2rem', letterSpacing: '-0.02em', color: 'var(--text-main)' }}>BrandForge</span>
+                <span className="brand-badge" style={{ fontSize: '0.7rem', padding: '0.15rem 0.5rem' }}>PRO</span>
+            </div>
 
             {/* Non-clickable Horizontal Workflow Stepper */}
             <div className="workflow-stepper">
