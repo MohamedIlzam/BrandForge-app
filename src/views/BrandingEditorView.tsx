@@ -234,17 +234,43 @@ export const BrandingEditorView: React.FC = () => {
                 <label style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'block', marginBottom: '0.35rem' }}>
                     Brand Mark Position Guidelines:
                 </label>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
-                    {(['Top-Right', 'Top-Left', 'Center', 'Bottom-Right'] as const).map((pos) => (
-                        <button
-                            key={pos}
-                            className={`btn ${editorProps.brandMarkPlacement === pos ? 'btn-primary' : 'btn-secondary'}`}
-                            style={{ padding: '0.4rem 0.5rem', fontSize: '0.8rem' }}
-                            onClick={() => handlePlacementChange(pos)}
-                        >
-                            {pos}
-                        </button>
-                    ))}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                    {/* Row 1: Top-Left & Top-Right */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                        {(['Top-Left', 'Top-Right'] as const).map((pos) => (
+                            <button
+                                key={pos}
+                                className={`btn ${editorProps.brandMarkPlacement === pos ? 'btn-primary' : 'btn-secondary'}`}
+                                style={{ padding: '0.4rem 0.5rem', fontSize: '0.8rem', justifyContent: 'center' }}
+                                onClick={() => handlePlacementChange(pos)}
+                            >
+                                {pos}
+                            </button>
+                        ))}
+                    </div>
+
+                    {/* Row 2: Center taking whole space */}
+                    <button
+                        className={`btn ${editorProps.brandMarkPlacement === 'Center' ? 'btn-primary' : 'btn-secondary'}`}
+                        style={{ width: '100%', padding: '0.4rem 0.5rem', fontSize: '0.8rem', justifyContent: 'center' }}
+                        onClick={() => handlePlacementChange('Center')}
+                    >
+                        Center
+                    </button>
+
+                    {/* Row 3: Bottom-Left & Bottom-Right */}
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.5rem' }}>
+                        {(['Bottom-Left', 'Bottom-Right'] as const).map((pos) => (
+                            <button
+                                key={pos}
+                                className={`btn ${editorProps.brandMarkPlacement === pos ? 'btn-primary' : 'btn-secondary'}`}
+                                style={{ padding: '0.4rem 0.5rem', fontSize: '0.8rem', justifyContent: 'center' }}
+                                onClick={() => handlePlacementChange(pos)}
+                            >
+                                {pos}
+                            </button>
+                        ))}
+                    </div>
                 </div>
             </div>
 
@@ -497,11 +523,13 @@ export const BrandingEditorView: React.FC = () => {
                             onMouseDown={(e) => handleMouseDown('logo', e)}
                             style={{
                                 position: 'absolute',
-                                top: editorProps.brandMarkPlacement.includes('Top') ? `${editorProps.clearSpaceMargin}px` : 'auto',
+                                top: editorProps.brandMarkPlacement.includes('Top') ? `${editorProps.clearSpaceMargin}px` : editorProps.brandMarkPlacement === 'Center' ? '50%' : 'auto',
                                 bottom: editorProps.brandMarkPlacement.includes('Bottom') ? `${editorProps.clearSpaceMargin}px` : 'auto',
                                 right: editorProps.brandMarkPlacement.includes('Right') ? `${editorProps.clearSpaceMargin}px` : 'auto',
-                                left: editorProps.brandMarkPlacement.includes('Left') ? `${editorProps.clearSpaceMargin}px` : 'auto',
-                                transform: `translate(${logoPosition.x}px, ${logoPosition.y}px)`,
+                                left: editorProps.brandMarkPlacement.includes('Left') ? `${editorProps.clearSpaceMargin}px` : editorProps.brandMarkPlacement === 'Center' ? '50%' : 'auto',
+                                transform: editorProps.brandMarkPlacement === 'Center'
+                                    ? `translate(calc(-50% + ${logoPosition.x}px), calc(-50% + ${logoPosition.y}px))`
+                                    : `translate(${logoPosition.x}px, ${logoPosition.y}px)`,
                                 cursor: 'grab',
                                 userSelect: 'none',
                                 background: primaryColor,

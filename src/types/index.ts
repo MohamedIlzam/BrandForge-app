@@ -33,7 +33,7 @@ export interface EditorProperties {
     clearSpaceMargin: number; // percentage e.g. 15
     focalPointRule: boolean;
     typographyScaling: 'Strict' | 'Fluid';
-    brandMarkPlacement: 'Top-Right' | 'Top-Left' | 'Center' | 'Bottom-Right';
+    brandMarkPlacement: 'Top-Right' | 'Top-Left' | 'Center' | 'Bottom-Right' | 'Bottom-Left';
     textAlign: 'left' | 'center' | 'right';
     fontSizeMultiplier: number;
 }
