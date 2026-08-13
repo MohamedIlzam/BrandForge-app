@@ -201,9 +201,9 @@ export const AIGenerationWorkspaceView: React.FC = () => {
 
                 {/* Middle Column: Generated Copy Feed */}
                 <div className="card">
-                    <div className="card-header">
-                        <span className="card-title">Creative Copy Options</span>
-                        <span className="brand-badge">{creativeCopies.length} Generated</span>
+                    <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'nowrap', gap: '0.5rem' }}>
+                        <span className="card-title" style={{ whiteSpace: 'nowrap', fontSize: '0.95rem' }}>Creative Copy Options</span>
+                        <span className="brand-badge" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>{creativeCopies.length} GENERATED</span>
                     </div>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxHeight: 480, overflowY: 'auto' }}>
