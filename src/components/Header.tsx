@@ -18,7 +18,7 @@ export const Header: React.FC = () => {
         { id: 'dashboard', label: 'Dashboard' },
         { id: 'ai_workspace', label: 'AI Workspace' },
         { id: 'editor', label: 'Branding Editor' },
-        { id: 'export', label: 'Export & Resize' }
+        { id: 'export', label: 'Export' }
     ];
 
     const currentStepIndex = steps.findIndex(s => s.id === activeView);
