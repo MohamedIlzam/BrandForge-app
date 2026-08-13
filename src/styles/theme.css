@@ -42,6 +42,7 @@
   padding: 0;
 }
 
+html,
 body {
   font-family: var(--font-family);
   background-color: var(--bg-app);
@@ -49,13 +50,17 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* Layout Architecture */
 .app-container {
   display: flex;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
 }
 
@@ -64,6 +69,8 @@ body {
   flex-direction: column;
   flex: 1;
   min-width: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   background-color: var(--bg-app);
 }
 
@@ -71,9 +78,11 @@ body {
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
+  overflow-x: hidden;
   max-width: 1600px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
 /* Navigation Header */
@@ -108,6 +117,10 @@ body {
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .nav-tabs {
@@ -118,6 +131,75 @@ body {
   padding: 0.35rem;
   border-radius: var(--border-radius-md);
 }
+
+.workflow-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1.1rem;
+  background: var(--bg-card-alt);
+  border-radius: 30px;
+  border: 1px solid var(--border-light);
+  user-select: none;
+}
+
+.step-node {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: default;
+  transition: all 0.2s ease;
+}
+
+.step-node.completed {
+  color: var(--primary-hover);
+}
+
+.step-node.active {
+  color: var(--text-main);
+  font-weight: 800;
+}
+
+.step-circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+.step-node.completed .step-circle {
+  background: var(--primary);
+  color: #ffffff;
+}
+
+.step-node.active .step-circle {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.step-connector {
+  width: 24px;
+  height: 2px;
+  background: #e2e8f0;
+  border-radius: 1px;
+  transition: all 0.2s ease;
+}
+
+.step-connector.completed {
+  background: var(--primary);
+}
+
 
 .nav-tab-btn {
   display: flex;
