@@ -45,7 +45,7 @@ export const DashboardView: React.FC = () => {
             <div className="grid-2" style={{ marginBottom: '2.5rem' }}>
                 {/* Active Brand Kit Card */}
                 <div className="card">
-                    <div className="card-header">
+                    <div className="card-header" style={{ flexWrap: 'wrap', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                             <div style={{
                                 background: 'var(--primary-light)',
@@ -71,7 +71,7 @@ export const DashboardView: React.FC = () => {
                             <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                                 Core Colors
                             </span>
-                            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
                                 {brandKit.colors.map((c, idx) => (
                                     <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                         <div style={{
@@ -95,7 +95,7 @@ export const DashboardView: React.FC = () => {
                             <span style={{ fontSize: '0.8rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                                 Typography & Brand Mark
                             </span>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.5rem' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
                                 <div style={{
                                     width: 36,
                                     height: 36,
@@ -106,7 +106,8 @@ export const DashboardView: React.FC = () => {
                                     justifyContent: 'center',
                                     fontWeight: 800,
                                     fontSize: '1.1rem',
-                                    color: 'var(--text-main)'
+                                    color: 'var(--text-main)',
+                                    flexShrink: 0
                                 }}>
                                     Aa
                                 </div>
@@ -117,10 +118,10 @@ export const DashboardView: React.FC = () => {
                             </div>
 
                             {/* Custom Logo Status Preview */}
-                            <div style={{ marginTop: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 0.75rem', background: 'var(--bg-secondary)', borderRadius: 'var(--border-radius-sm)', border: '1px solid var(--border-color)' }}>
+                            <div style={{ marginTop: '0.85rem', display: 'flex', alignItems: 'center', gap: '0.6rem', padding: '0.5rem 0.75rem', background: 'var(--bg-secondary)', borderRadius: 'var(--border-radius-sm)', border: '1px solid var(--border-color)', flexWrap: 'wrap' }}>
                                 <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--text-muted)' }}>Brand Logo:</div>
                                 {useBrandContext().customLogoUrl ? (
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
                                         <img src={useBrandContext().customLogoUrl!} alt="Uploaded Brand Logo" style={{ height: 22, maxHeight: 24, objectFit: 'contain' }} />
                                         <span style={{ fontSize: '0.75rem', color: 'var(--primary-hover)', fontWeight: 700 }}>Custom Logo Active</span>
                                     </div>
@@ -137,7 +138,7 @@ export const DashboardView: React.FC = () => {
 
                 {/* Asset Health Card */}
                 <div className="card">
-                    <div className="card-header">
+                    <div className="card-header" style={{ flexWrap: 'wrap', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
                             <div style={{
                                 background: 'rgba(16, 185, 129, 0.15)',
@@ -184,9 +185,10 @@ export const DashboardView: React.FC = () => {
                         background: '#fffbeb',
                         border: '1px solid #fde68a',
                         borderRadius: 'var(--border-radius-sm)',
-                        marginTop: '1.25rem'
+                        marginTop: '1.25rem',
+                        flexWrap: 'wrap'
                     }}>
-                        <AlertTriangle size={20} color="#d97706" />
+                        <AlertTriangle size={20} color="#d97706" style={{ flexShrink: 0 }} />
                         <div style={{ fontSize: '0.85rem', color: '#92400e' }}>
                             <strong>Attention needed:</strong> Looking good! {brandKit.warningsCount} templates need font alignment updates.
                         </div>

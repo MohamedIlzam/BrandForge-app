@@ -1,7 +1,7 @@
 import React from 'react';
 import { useBrandContext, ViewMode } from '../context/BrandContext';
 import {
-    Sparkles,
+    Plus,
     Check,
     Menu,
     Layers
@@ -69,7 +69,7 @@ export const Header: React.FC = () => {
                     onClick={() => setActiveView('ai_workspace')}
                     style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}
                 >
-                    <Sparkles size={16} />
+                    <Plus size={16} />
                     <span className="btn-label-desktop">New Generation</span>
                 </button>
             </div>

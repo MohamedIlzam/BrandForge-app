@@ -297,6 +297,8 @@ body {
   padding: 1.5rem;
   box-shadow: var(--shadow-sm);
   transition: var(--transition-normal);
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .card:hover {
