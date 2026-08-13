@@ -1,25 +1,23 @@
 import React from 'react';
-import { useBrandContext } from '../context/BrandContext';
+import { useBrandContext, ViewMode } from '../context/BrandContext';
 import {
-    Palette,
-    Type,
-    ShieldCheck,
-    Image as ImageIcon,
+    LayoutDashboard,
+    Sparkles,
+    Sliders,
+    Download,
     Sparkle,
     HelpCircle,
-    MessageSquareHeart,
-    Wand2
+    MessageSquareHeart
 } from 'lucide-react';
 
 export const Sidebar: React.FC = () => {
     const { activeView, setActiveView } = useBrandContext();
 
-    const brandKitItems = [
-        { id: 'brand_kit', label: 'Brand Kit', icon: <Wand2 size={18} />, view: 'dashboard' as const },
-        { id: 'typography', label: 'Typography', icon: <Type size={18} />, view: 'editor' as const },
-        { id: 'colors', label: 'Color Palette', icon: <Palette size={18} />, view: 'editor' as const },
-        { id: 'logos', label: 'Logos & Assets', icon: <ShieldCheck size={18} />, view: 'export' as const },
-        { id: 'imagery', label: 'Imagery & AI', icon: <ImageIcon size={18} />, view: 'ai_workspace' as const }
+    const navigationItems: { id: ViewMode; label: string; icon: React.ReactNode }[] = [
+        { id: 'dashboard', label: 'Dashboard', icon: <LayoutDashboard size={18} /> },
+        { id: 'ai_workspace', label: 'AI Workspace', icon: <Sparkles size={18} /> },
+        { id: 'editor', label: 'Branding Editor', icon: <Sliders size={18} /> },
+        { id: 'export', label: 'Export & Resize', icon: <Download size={18} /> }
     ];
 
     const supportItems = [
@@ -36,11 +34,11 @@ export const Sidebar: React.FC = () => {
 
             <div className="sidebar-title">Global Styles</div>
             <ul className="sidebar-menu">
-                {brandKitItems.map((item) => (
+                {navigationItems.map((item) => (
                     <li
                         key={item.id}
-                        className={`sidebar-item ${activeView === item.view ? 'active' : ''}`}
-                        onClick={() => setActiveView(item.view)}
+                        className={`sidebar-item ${activeView === item.id ? 'active' : ''}`}
+                        onClick={() => setActiveView(item.id)}
                     >
                         {item.icon}
                         <span>{item.label}</span>
@@ -60,3 +58,4 @@ export const Sidebar: React.FC = () => {
         </aside>
     );
 };
+
