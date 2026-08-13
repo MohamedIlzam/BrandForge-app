@@ -581,6 +581,10 @@ body {
   .mobile-editor-floating-btn {
     display: flex !important;
   }
+
+  .brand-logo .brand-title {
+    display: none !important;
+  }
 }
 
 /* Mobile Editor Color & Properties Drawer */

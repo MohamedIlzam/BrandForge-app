@@ -37,7 +37,7 @@ export const Header: React.FC = () => {
                         objectFit: 'contain'
                     }}
                 />
-                <span style={{ fontWeight: 800, fontSize: '1.2rem', letterSpacing: '-0.02em', color: 'var(--text-main)' }}>BrandForge</span>
+                <span className="brand-title" style={{ fontWeight: 800, fontSize: '1.2rem', letterSpacing: '-0.02em', color: 'var(--text-main)' }}>BrandForge</span>
                 <span className="brand-badge" style={{ fontSize: '0.7rem', padding: '0.15rem 0.5rem' }}>PRO</span>
             </div>
 
