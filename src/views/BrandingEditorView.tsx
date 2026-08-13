@@ -465,7 +465,7 @@ export const BrandingEditorView: React.FC = () => {
 
             <div className="editor-workspace-grid">
                 {/* Left Column: Interactive Visual Canvas */}
-                <div className="card" style={{ padding: '1.25rem', background: '#0f172a', color: '#ffffff', minHeight: 480, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <div className="card editor-canvas-card" style={{ padding: '1.25rem', background: '#0f172a', color: '#ffffff', minHeight: 480, position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'stretch', justifyContent: 'flex-start' }}>
                     <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid #334155', paddingBottom: '0.75rem', flexWrap: 'wrap', gap: '0.5rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.85rem', color: '#94a3b8' }}>
                             <Grid size={16} color={primaryColor} />
@@ -599,7 +599,7 @@ export const BrandingEditorView: React.FC = () => {
                 </div>
 
                 {/* Right Column: Editor Properties Panel */}
-                <div className="card">
+                <div className="card editor-properties-card">
                     <div className="card-header">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <Palette size={20} color={primaryColor} />
