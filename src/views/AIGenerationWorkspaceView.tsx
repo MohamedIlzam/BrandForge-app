@@ -94,9 +94,9 @@ export const AIGenerationWorkspaceView: React.FC = () => {
             </div>
 
             {/* Main 3-Column Workspace */}
-            <div className="grid-3" style={{ gridTemplateColumns: '1.1fr 1fr 1.2fr', alignItems: 'stretch' }}>
+            <div className="ai-workspace-grid">
                 {/* Left Column: Dedicated AI Prompt Space Card */}
-                <div className="card" style={{ display: 'flex', flexDirection: 'column', minHeight: 540 }}>
+                <div className="card" style={{ display: 'flex', flexDirection: 'column' }}>
                     <div className="card-header" style={{ marginBottom: '1rem' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <Wand2 size={20} color="var(--primary)" />

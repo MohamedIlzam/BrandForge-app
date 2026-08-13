@@ -11,29 +11,8 @@ interface HeaderProps {
     onToggleMobileMenu?: () => void;
 }
 
-export const Header: React.FC<HeaderProps> = ({ onToggleMobileMenu }) => {
+export const Header: React.FC = () => {
     const { activeView, setActiveView } = useBrandContext();
-    const [isScrolled, setIsScrolled] = React.useState(false);
-
-    React.useEffect(() => {
-        const handleScroll = () => {
-            const scrollTop = window.scrollY || document.documentElement.scrollTop || document.querySelector('.content-area')?.scrollTop || 0;
-            setIsScrolled(scrollTop > 20);
-        };
-
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        const contentArea = document.querySelector('.content-area');
-        if (contentArea) {
-            contentArea.addEventListener('scroll', handleScroll, { passive: true });
-        }
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            if (contentArea) {
-                contentArea.removeEventListener('scroll', handleScroll);
-            }
-        };
-    }, []);
 
     const steps: { id: ViewMode; label: string }[] = [
         { id: 'dashboard', label: 'Dashboard' },
@@ -45,21 +24,7 @@ export const Header: React.FC<HeaderProps> = ({ onToggleMobileMenu }) => {
     const currentStepIndex = steps.findIndex(s => s.id === activeView);
 
     return (
-        <header className={`header-nav ${isScrolled ? 'scrolled' : ''}`}>
-            {/* Mobile Header Brand & Hamburger Button */}
-            <div className="mobile-header-bar">
-                <button
-                    className="mobile-hamburger-btn"
-                    onClick={onToggleMobileMenu}
-                    aria-label="Open Menu"
-                >
-                    <Menu size={22} />
-                </button>
-                <div className="mobile-brand-title">
-                    <Layers size={18} color="var(--primary)" />
-                    <span>BrandForge</span>
-                </div>
-            </div>
+        <header className="header-nav">
 
             {/* Non-clickable Horizontal Workflow Stepper */}
             <div className="workflow-stepper">
