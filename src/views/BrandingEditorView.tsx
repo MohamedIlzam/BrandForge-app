@@ -39,7 +39,6 @@ export const BrandingEditorView: React.FC = () => {
     const [backgroundBlurDepth, setBackgroundBlurDepth] = useState<number>(0);
     const [primaryColor, setPrimaryColor] = useState<string>('#14b89c');
     const [canvasBgMode, setCanvasBgMode] = useState<string>('slate');
-    const [isMobileDrawerOpen, setIsMobileDrawerOpen] = useState<boolean>(false);
 
     const selectedCopy = creativeCopies[0];
     const currentBgObj = CANVAS_BG_MODES.find(b => b.id === canvasBgMode) || CANVAS_BG_MODES[0];
@@ -350,7 +349,7 @@ export const BrandingEditorView: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Right Column: Editor Properties Panel (Desktop) */}
+                {/* Right Column: Editor Properties Panel */}
                 <div className="card">
                     <div className="card-header">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
@@ -362,75 +361,6 @@ export const BrandingEditorView: React.FC = () => {
                     {renderPropertiesControls()}
                 </div>
             </div>
-
-            {/* Mobile Floating Trigger Button */}
-            <button
-                className="mobile-editor-floating-btn"
-                style={{ background: primaryColor }}
-                onClick={() => setIsMobileDrawerOpen(true)}
-            >
-                <Palette size={18} />
-                <span>Colors & Layout</span>
-            </button>
-
-            {/* Mobile Glassmorphic Drawer / Modal Overlay */}
-            {isMobileDrawerOpen && (
-                <div style={{
-                    position: 'fixed',
-                    inset: 0,
-                    zIndex: 1000,
-                    background: 'rgba(0, 0, 0, 0.65)',
-                    backdropFilter: 'blur(8px)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'flex-end',
-                    animation: 'fadeIn 0.2s ease-out'
-                }}>
-                    <div style={{
-                        background: 'var(--surface-color)',
-                        borderTopLeftRadius: '24px',
-                        borderTopRightRadius: '24px',
-                        padding: '1.5rem',
-                        maxHeight: '85vh',
-                        overflowY: 'auto',
-                        boxShadow: '0 -10px 40px rgba(0,0,0,0.3)',
-                        borderTop: '1px solid var(--border-color)'
-                    }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-color)' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                                <Palette size={20} color={primaryColor} />
-                                <h3 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 800 }}>Colors & Layout Properties</h3>
-                            </div>
-                            <button
-                                onClick={() => setIsMobileDrawerOpen(false)}
-                                style={{
-                                    background: 'var(--bg-color)',
-                                    border: 'none',
-                                    borderRadius: '50%',
-                                    width: 32,
-                                    height: 32,
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    cursor: 'pointer'
-                                }}
-                            >
-                                <X size={18} color="var(--text-color)" />
-                            </button>
-                        </div>
-
-                        {renderPropertiesControls()}
-
-                        <button
-                            className="btn btn-primary"
-                            style={{ width: '100%', marginTop: '1.5rem', padding: '0.75rem', background: primaryColor }}
-                            onClick={() => setIsMobileDrawerOpen(false)}
-                        >
-                            Apply & Close
-                        </button>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
