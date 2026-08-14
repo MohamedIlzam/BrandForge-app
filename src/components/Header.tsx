@@ -65,12 +65,25 @@ export const Header: React.FC = () => {
 
             <div className="user-actions">
                 <button
-                    className="btn btn-primary"
+                    className="btn"
                     onClick={() => setActiveView('ai_workspace')}
-                    style={{ padding: '0.5rem 1rem', fontSize: '0.85rem' }}
+                    style={{
+                        padding: '0.55rem 1.1rem',
+                        fontSize: '0.85rem',
+                        background: '#006853',
+                        color: '#ffffff',
+                        border: 'none',
+                        borderRadius: '30px',
+                        fontWeight: 700,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        boxShadow: '0 4px 12px rgba(0, 104, 83, 0.25)',
+                        cursor: 'pointer'
+                    }}
                 >
                     <Plus size={16} />
-                    <span className="btn-label-desktop">New Generation</span>
+                    <span className="btn-label-desktop">New Design</span>
                 </button>
             </div>
         </header>

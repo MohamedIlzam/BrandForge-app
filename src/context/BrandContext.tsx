@@ -98,21 +98,21 @@ const initialProjects: DesignProject[] = [
         title: 'Q3 Summit Post',
         category: 'Social Media',
         updatedAt: 'Edited 2h ago',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=600&q=80'
+        thumbnailUrl: '/posters/q3_summit.png'
     },
     {
         id: 'proj-2',
         title: 'Agency Overview Flyer',
         category: 'Print',
         updatedAt: 'Edited 1d ago',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=600&q=80'
+        thumbnailUrl: '/posters/agency_overview.png'
     },
     {
         id: 'proj-3',
         title: 'Pitch Deck Template',
         category: 'Presentation',
         updatedAt: 'Edited 3d ago',
-        thumbnailUrl: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80',
+        thumbnailUrl: '/posters/pitch_deck.png',
         isPro: true
     }
 ];
