@@ -107,10 +107,23 @@ export const ExportResizeView: React.FC = () => {
                                 <button
                                     key={fmt}
                                     className={`btn ${selectedFormat === fmt ? 'btn-primary' : 'btn-secondary'}`}
-                                    style={{ flex: 1 }}
+                                    style={{ flex: 1, position: 'relative' }}
                                     onClick={() => setSelectedFormat(fmt)}
                                 >
-                                    {fmt}
+                                    <span>{fmt}</span>
+                                    {(fmt === 'SVG' || fmt === 'PDF') && (
+                                        <span style={{
+                                            fontSize: '0.6rem',
+                                            fontWeight: 800,
+                                            background: selectedFormat === fmt ? '#ffffff' : 'var(--primary)',
+                                            color: selectedFormat === fmt ? 'var(--primary)' : '#ffffff',
+                                            padding: '0.1rem 0.35rem',
+                                            borderRadius: '4px',
+                                            marginLeft: '0.3rem'
+                                        }}>
+                                            PRO
+                                        </span>
+                                    )}
                                 </button>
                             ))}
                         </div>
@@ -128,7 +141,7 @@ export const ExportResizeView: React.FC = () => {
                                     style={{ flex: 1 }}
                                     onClick={() => setSelectedQuality(q)}
                                 >
-                                    {q === '300 DPI' ? 'Print (300 DPI)' : 'Web (72 DPI)'}
+                                    {q === '300 DPI' ? 'Print 300 DPI (Pro)' : 'Web (72 DPI)'}
                                 </button>
                             ))}
                         </div>

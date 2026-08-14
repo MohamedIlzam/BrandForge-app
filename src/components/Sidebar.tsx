@@ -80,7 +80,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen = false, onClose }) => 
                     )}
                 </div>
 
-                <div className="sidebar-title">Global Styles</div>
+                <div className="sidebar-title">Workflow</div>
                 <ul className="sidebar-menu">
                     {navigationItems.map((item) => (
                         <li

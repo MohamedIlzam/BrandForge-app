@@ -5,12 +5,30 @@ export interface BrandColor {
 }
 
 export interface BrandKit {
+    id: string;
     name: string;
     font: string;
     colors: BrandColor[];
     consistencyScore: number;
     warningsCount: number;
     logoUrl?: string;
+    isPro?: boolean;
+    industry?: string;
+}
+
+export interface BrandKnowledge {
+    visionPrompt: string;
+    targetAudience: string;
+    toneTags: string[];
+    brandValues: string;
+    industryCategory: string;
+}
+
+export interface GenerationUsage {
+    used: number;
+    total: number;
+    isPro: boolean;
+    tierName: 'Free Tier' | 'Pro Member' | 'Enterprise';
 }
 
 export interface DesignProject {
@@ -19,6 +37,7 @@ export interface DesignProject {
     category: 'Social Media' | 'Print' | 'Presentation';
     updatedAt: string;
     thumbnailUrl: string;
+    isPro?: boolean;
 }
 
 export interface CreativeCopyItem {
@@ -44,4 +63,14 @@ export interface ExportPreset {
     dimensions: string;
     format: 'PNG' | 'SVG' | 'PDF';
     quality: 'High (300 DPI)' | 'Web (72 DPI)';
+    isProOnly?: boolean;
 }
+
+export interface LogoOption {
+    id: string;
+    name: string;
+    url: string | null;
+    isDefault?: boolean;
+    category?: string;
+}
+
