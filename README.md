@@ -8,6 +8,11 @@ BrandForge 2.0 is a Swiss Functional-Modernist web application built with React,
 - **Horizontal Split-Pane Resizer**: Dynamic draggable divider handle for customizing left preview vs right chat panel widths.
 - **Brand Identity Controls**: Core identity parameter manager and brand logo asset library.
 
+## 🏗 Architecture & Design System
+- **Swiss Functional Modernism**: High contrast typography, strict alignment rules, and functional teal accents (`#14b89c`).
+- **Context API**: Single-source `BrandContext` state managing global brand kits, vision prompts, and active logo selections.
+- **Responsive Layout**: Fluid flex-split container with desktop horizontal resizer and mobile adaptive stacking.
+
 ## 🛠 Tech Stack
 - **Frontend Framework**: React 18 with TypeScript
 - **Build Tool**: Vite
