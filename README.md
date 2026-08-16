@@ -13,6 +13,19 @@ BrandForge 2.0 is a Swiss Functional-Modernist web application built with React,
 - **Context API**: Single-source `BrandContext` state managing global brand kits, vision prompts, and active logo selections.
 - **Responsive Layout**: Fluid flex-split container with desktop horizontal resizer and mobile adaptive stacking.
 
+## ⚡ Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start local development server
+npm run dev
+
+# Build production bundle
+npm run build
+```
+
 ## 🛠 Tech Stack
 - **Frontend Framework**: React 18 with TypeScript
 - **Build Tool**: Vite
