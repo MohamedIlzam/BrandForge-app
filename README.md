@@ -13,6 +13,12 @@ BrandForge 2.0 is a Swiss Functional-Modernist web application built with React,
 - **Context API**: Single-source `BrandContext` state managing global brand kits, vision prompts, and active logo selections.
 - **Responsive Layout**: Fluid flex-split container with desktop horizontal resizer and mobile adaptive stacking.
 
+## ⚡ Interactive Chat & Workflow Options
+- **Quick Vision Presets**: One-click prompt shortcuts for Artisanal Coffee, Eco Luxury, Tech SaaS, and Minimalist Studio.
+- **Tone Alignment**: Real-time voice tone switching (`#Bold & Direct`, `#Clean & Minimal`, `#Inspiring`).
+- **One-Click Live Preview**: Selecting any generated headline card in the chat history updates the canvas poster preview immediately.
+- **Keyboard Shortcut**: Press `Enter` to submit prompts, `Shift + Enter` for newlines.
+
 ## ⚡ Getting Started
 
 ```bash
