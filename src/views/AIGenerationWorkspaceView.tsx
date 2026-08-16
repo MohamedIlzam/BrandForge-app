@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useBrandContext } from '../context/BrandContext';
 import { ChatMessage, PresetPrompt } from '../types/chat';
+import { calculateSplitPercentage } from '../utils/resizer';
 import {
     Sparkles,
     Wand2,
@@ -106,10 +107,8 @@ export const AIGenerationWorkspaceView: React.FC = () => {
         const handleMouseMove = (e: MouseEvent) => {
             if (!isDragging || !containerRef.current) return;
             const rect = containerRef.current.getBoundingClientRect();
-            const newWidth = ((e.clientX - rect.left) / rect.width) * 100;
-            if (newWidth >= 25 && newWidth <= 72) {
-                setLeftWidthPercent(newWidth);
-            }
+            const newWidth = calculateSplitPercentage(e.clientX, rect.left, rect.width, 25, 72);
+            setLeftWidthPercent(newWidth);
         };
 
         const handleMouseUp = () => {
